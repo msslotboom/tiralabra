@@ -33,4 +33,4 @@ poetry run invoke lint
 Auto-formatting is done using the command:
 ```
 poetry run invoke format
-``
+```
