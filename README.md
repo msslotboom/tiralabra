@@ -25,6 +25,7 @@ And you can get the test coverage report using the command:
 poetry run invoke coverage-report
 ```
 This generates a html coverage report. You can read it by opening the generated file /project/htmlcov/index.html in your favourite web-browser.
+
 The lint report can be seen with the command:
 ```
 poetry run invoke lint
