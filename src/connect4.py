@@ -1,5 +1,3 @@
-ROWS, COLUMNS = 6, 7
-
 class Connect4:
 	def __init__(self) -> None:
 		self.table = [[0, 0, 0, 0, 0, 0, 0],
