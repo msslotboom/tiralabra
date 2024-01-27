@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "connect4-algo"
+name = "tiralabra"
 version = "0.1.0"
 description = ""
 authors = ["Mikael Slotboom <mikael.slotboom@helsinki.fi>"]
