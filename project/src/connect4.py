@@ -12,34 +12,13 @@ class Connect4:
 
         self.last_added = (0, 0)
 
-        # TODO: does not account for board being full
-    def play(self):
-        while True:
-            for row in self.table:
-                print(row)
-            move = int(input("Pick which column to play"))
-            if move >= len(self.table[0]) or move < 0:
-                print("Invalid move!")
-                continue
-            if not self.play_move(move, 1):
-                print("Invalid move!")
-                continue
-            if self.calculate_winner():
-                print("You won!")
-                break
-            self._play_random_move()
-            if self.calculate_winner():
-                print("You lost!")
-                break
-
-        # TODO: Does not account for board being full
     def _play_random_move(self):
         while True:
             random_move = random.randint(0, len(self.table[0])-1)
             if not self.play_move(random_move, 2):
                 continue
             break
-	
+
     def play_move(self, col, player) -> bool:
         if self.table[0][col] != 0:
             return False
@@ -52,7 +31,7 @@ class Connect4:
         self.table[len(self.table)-1][col] = player
         self.last_added = (len(self.table)-1, col)
         return True
-    
+
     def calculate_winner(self) -> bool:
         row, col = self.last_added
         # Check all directions from new move to see if previous move triggered a win
@@ -71,7 +50,6 @@ class Connect4:
             if row+i == len(self.table):
                 break
             if self.table[row+i][col] == player:
-                print(row+i, col, self.table[row+i][col])
                 counter += 1
             else:
                 break
@@ -79,7 +57,6 @@ class Connect4:
             if row-i < 0:
                 break
             if self.table[row-i][col] == player:
-                print(row-i, col, self.table[row-i][col])
                 counter += 1
             else:
                 break
@@ -110,14 +87,14 @@ class Connect4:
     def _check_rising_diag(self, row: int, col: int, player: int) -> bool:
         counter = 1
         for i in range(1, 4):
-            if row+i == len(self.table) or col+1 == len(self.table[row+i]):
+            if row+i == len(self.table) or col+i == len(self.table[row]):
                 break
             if self.table[row+i][col+i] == player:
                 counter += 1
             else:
                 break
         for i in range(1, 4):
-            if row-i < 0 or col-1 < 0:
+            if row-i < 0 or col-i < 0:
                 break
             if self.table[row-i][col-i] == player:
                 counter += 1
@@ -130,14 +107,14 @@ class Connect4:
     def _check_lowering_diag(self, row: int, col: int, player: int) -> bool:
         counter = 1
         for i in range(1, 4):
-            if row+i == len(self.table) or col-1 < 0:
+            if row+i == len(self.table) or col-i < 0:
                 break
             if self.table[row+i][col-i] == player:
                 counter += 1
             else:
                 break
         for i in range(1, 4):
-            if row-i < 0 or col+1 == len(self.table[row-i]):
+            if row-i < 0 or col+i == len(self.table[row-i]):
                 break
             if self.table[row-i][col+i] == player:
                 counter += 1
