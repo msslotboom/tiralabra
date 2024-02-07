@@ -44,6 +44,12 @@ class Connect4:
             return True
         return False
 
+    def board_is_full(self) -> bool:
+        for item in self.table[0]:
+            if item == 0:
+                return False
+        return True
+    
     def _check_horizontal_winner(self, row: int, col: int, player: int) -> bool:
         counter = 1
         for i in range(1, 4):
