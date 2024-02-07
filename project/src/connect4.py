@@ -49,7 +49,7 @@ class Connect4:
             if item == 0:
                 return False
         return True
-    
+
     def _check_horizontal_winner(self, row: int, col: int, player: int) -> bool:
         counter = 1
         for i in range(1, 4):
