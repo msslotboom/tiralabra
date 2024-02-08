@@ -1,15 +1,16 @@
-from connect4 import Connect4
 from copy import deepcopy
 from random import choice
+from connect4 import Connect4
 
 
 class Minimax():
-    def __init__(self) -> None:
-        self.game = Connect4()
-        self.move_dict = {}
+    """Minimax algorithm, calculates the best move. It simulates a game where both players play optimally, and then selects the move where it has the biggest advantage"""
 
-    # Heuristic: the higher, the better for the computer
-    def _heuristic(self, game: Connect4):
+    def __init__(self) -> None:
+        pass
+
+    def _heuristic(self, game: Connect4) -> int:
+        """heuristic function that returns 1 when it wins, -1 when the opponent wins and 0 when no one wins."""
         if game.calculate_winner():
             row, col = game.last_added
             if game.table[row][col] == 2:
@@ -17,7 +18,8 @@ class Minimax():
             return -1
         return 0
 
-    def _minimax(self, game, depth, maximising):
+    def _minimax(self, game: Connect4, depth: int, maximising: bool) -> int:
+        """Algorithm that maximises the move of the computer and minimises the move of the human player. Note that the heuristic gives a negative value when the move is good for the human player, whichs means that it is effectively playing the best moves for both player"""
         if depth == 0 or game.calculate_winner():
             return self._heuristic(game)
         if maximising:
@@ -37,7 +39,8 @@ class Minimax():
                     value = min(value, self._minimax(new_game, depth-1, True))
             return value
 
-    def calculate_move(self, board: list, depth: int):
+    def calculate_move(self, board: list, depth: int) -> int:
+        """Calculates the best move by calling the minimax algorithm. It gives all its possible moves to the minimax algorithm, returns the index of the best move"""
         evaluations = {}
         for i in range(len(board)):
             game = Connect4()
@@ -48,7 +51,8 @@ class Minimax():
         selected_move = self._select_highest_random_score(evaluations)
         return selected_move
 
-    def _select_highest_random_score(evaluations: list):
+    def _select_highest_random_score(evaluations: list) -> int:
+        """Function called by calculate move, to make sure that if there are multiple optimal moves, the selection of the optimal move is random"""
         highest_score = max(evaluations, key=evaluations.get)
         all_highest_scores = []
         for score in evaluations:

@@ -3,10 +3,15 @@ from connect4 import Connect4
 
 
 class GameLoop():
+    """
+    Runs the game and allows for the communication of the algorithm and the human player with the game
+
+    Attributes:
+            game: stores the class of the game being played"""
+
     def __init__(self, game: Connect4) -> None:
         self.game = game
 
-        # TODO: does not account for board being completely full
     def run(self):
         while True:
             if self.game.board_is_full():
