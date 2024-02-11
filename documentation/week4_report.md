@@ -1,6 +1,6 @@
 ## Week 4 report
 
-This week the minimax algorithm was implemented. The existing code has been restructured to make the use of an algorithm in a seperate class possible. Docstring was written in all necessary places, to improve the readability and make the peer-review easier.
+This week the minimax algorithm was implemented. The existing code has been restructured to make the use of an algorithm in a seperate class possible. Some bugs related to the check of the wincondition with a diagonal four in a row have been fixed. Docstring was written in all necessary places, to improve the readability and make the peer-review easier.
 
 | Day | Time | Description |
 | ----- | ------------- | ------ |
