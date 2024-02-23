@@ -38,125 +38,125 @@ class TestHeuristic(unittest.TestCase):
 
     def test_heuristic(self):
         result = self.heuristic._calculate_heuristic([[0, 0, 0, 1, 0, 0, 0],
-                                            [0, 0, 0, 0, 0, 0, 0],
-                                            [0, 0, 0, 0, 0, 0, 0],
-                                            [0, 0, 1, 0, 0, 0, 0],
-                                            [0, 1, 0, 0, 1, 0, 0],
-                                            [1, 0, 0, 1, 0, 0, 0]])
+                                                      [0, 0, 0, 0, 0, 0, 0],
+                                                      [0, 0, 0, 0, 0, 0, 0],
+                                                      [0, 0, 1, 0, 0, 0, 0],
+                                                      [0, 1, 0, 0, 1, 0, 0],
+                                                      [1, 0, 0, 1, 0, 0, 0]])
         self.assertEqual(result, 100)
 
     def test_heuristic_finds_horizontal_with_empty_in_middle(self):
         table = [[0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 1, 0, 0],
-                [1, 1, 0, 1, 0, 0, 0]]
+                 [0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 1, 0, 0],
+                 [1, 1, 0, 1, 0, 0, 0]]
 
         result = self.heuristic._calculate_heuristic(table)
         self.assertEqual(result, 100)
 
     def test_no_count_horizontal_many_zeros(self):
         table = [[0, 0, 0, 0, 0, 0, 0],
-                            [0, 0, 0, 0, 0, 0, 0],
-                            [0, 0, 0, 0, 0, 0, 0],
-                            [0, 0, 0, 0, 0, 0, 0],
-                            [0, 0, 0, 0, 1, 0, 0],
-                            [2, 0, 2, 0, 0, 1, 1]]
+                 [0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 1, 0, 0],
+                 [2, 0, 2, 0, 0, 1, 1]]
 
         result = self.heuristic._calculate_heuristic(table)
         self.assertEqual(result, 0)
 
     def test_no_count_when_two_off_one_in_a_row_horizontally(self):
         table = [[0, 0, 0, 0, 0, 0, 0],
-                            [0, 0, 0, 0, 0, 0, 0],
-                            [0, 0, 0, 0, 0, 0, 0],
-                            [0, 0, 0, 0, 0, 0, 0],
-                            [0, 0, 0, 0, 1, 0, 0],
-                            [1, 1, 0, 0, 0, 0, 0]]
+                 [0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 1, 0, 0],
+                 [1, 1, 0, 0, 0, 0, 0]]
         result = self.heuristic._calculate_heuristic(table)
         self.assertEqual(result, 0)
 
     def test_find_sequence_start_zero_horizontal(self):
         table = [[0, 0, 0, 0, 0, 0, 0],
-                            [0, 0, 0, 0, 0, 0, 0],
-                            [0, 0, 0, 0, 0, 0, 0],
-                            [0, 0, 0, 0, 0, 0, 0],
-                            [0, 0, 0, 0, 1, 0, 0],
-                            [2, 0, 0, 0, 1, 1, 1]]
+                 [0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 1, 0, 0],
+                 [2, 0, 0, 0, 1, 1, 1]]
         result = self.heuristic._calculate_heuristic(table)
         self.assertEqual(result, 100)
 
     def test_find_sequence_with_zero_at_start(self):
         table = [[0, 0, 0, 0, 0, 0, 0],
-                            [0, 0, 0, 0, 0, 0, 0],
-                            [0, 0, 0, 0, 0, 0, 0],
-                            [0, 0, 0, 0, 0, 0, 0],
-                            [0, 0, 0, 0, 1, 0, 0],
-                            [0, 1, 1, 1, 2, 0, 0]]
+                 [0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 1, 0, 0],
+                 [0, 1, 1, 1, 2, 0, 0]]
 
         result = self.heuristic._calculate_heuristic(table)
         self.assertEqual(result, 100)
 
     def test_heuristc_finds_if_zero_in_front_and_empty_in_middle(self):
         table = [[0, 0, 0, 0, 0, 0, 0],
-                            [0, 0, 0, 0, 0, 0, 0],
-                            [0, 0, 0, 0, 0, 0, 0],
-                            [0, 0, 0, 0, 0, 0, 0],
-                            [0, 0, 0, 0, 1, 0, 0],
-                            [0, 0, 1, 0, 1, 1, 0]]
+                 [0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 1, 0, 0],
+                 [0, 0, 1, 0, 1, 1, 0]]
 
         result = self.heuristic._calculate_heuristic(table)
         self.assertEqual(result, 100)
 
     def test_heuristic_finds_vertical(self):
         table = [[0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0],
-                [1, 0, 0, 0, 0, 0, 0],
-                [1, 0, 0, 0, 1, 0, 0],
-                [1, 0, 2, 1, 0, 0, 0]]
+                 [0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0, 0, 0],
+                 [1, 0, 0, 0, 0, 0, 0],
+                 [1, 0, 0, 0, 1, 0, 0],
+                 [1, 0, 2, 1, 0, 0, 0]]
 
         result = self.heuristic._calculate_heuristic(table)
         self.assertEqual(result, 100)
 
     def test_heuristic_no_find_blocked_horizontal(self):
         table = [[0, 0, 0, 0, 0, 0, 0],
-                            [0, 0, 0, 0, 0, 0, 0],
-                            [0, 0, 0, 0, 0, 0, 0],
-                            [0, 0, 0, 0, 0, 0, 0],
-                            [0, 0, 0, 0, 1, 0, 0],
-                            [1, 1, 2, 1, 0, 0, 0]]
+                 [0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 1, 0, 0],
+                 [1, 1, 2, 1, 0, 0, 0]]
 
         result = self.heuristic._calculate_heuristic(table)
         self.assertEqual(result, 0)
 
     def test_heuristic_finds_diag_start_on_column_zero(self):
         table = [[0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 2, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0],
-                [0, 2, 0, 0, 0, 0, 0],
-                [2, 0, 0, 0, 1, 0, 0],
-                [2, 0, 0, 0, 1, 2, 1]]
+                 [0, 0, 0, 2, 0, 0, 0],
+                 [0, 0, 0, 0, 0, 0, 0],
+                 [0, 2, 0, 0, 0, 0, 0],
+                 [2, 0, 0, 0, 1, 0, 0],
+                 [2, 0, 0, 0, 1, 2, 1]]
         result = self.heuristic._calculate_heuristic(table)
         self.assertEqual(result, -100)
 
     def test_heuristic_finds_diag_not_starting_in_column_zero(self):
         table = [[0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 2, 0, 0],
-                [0, 0, 0, 2, 1, 0, 0],
-                [2, 0, 2, 0, 1, 2, 1]]
+                 [0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 2, 0, 0],
+                 [0, 0, 0, 2, 1, 0, 0],
+                 [2, 0, 2, 0, 1, 2, 1]]
         result = self.heuristic._calculate_heuristic(table)
         self.assertEqual(result, -100)
 
     def test_heuristic_finds_rising_starting_from_bottom_row(self):
         table = [[0, 0, 0, 0, 0, 0, 0],
-                            [0, 0, 0, 0, 0, 0, 0],
-                            [0, 0, 0, 0, 0, 0, 0],
-                            [0, 0, 1, 0, 0, 0, 0],
-                            [0, 1, 0, 0, 1, 0, 0],
-                            [1, 0, 0, 1, 0, 0, 0]]
+                 [0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 1, 0, 0, 0, 0],
+                 [0, 1, 0, 0, 1, 0, 0],
+                 [1, 0, 0, 1, 0, 0, 0]]
         result = self.heuristic._calculate_heuristic(table)
         self.assertEqual(result, 100)

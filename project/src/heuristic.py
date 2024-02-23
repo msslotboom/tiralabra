@@ -1,5 +1,6 @@
 HEURISTIC_MULTIPLIER = 100
 
+
 class Heuristic():
     def __init__(self) -> None:
         pass
@@ -12,18 +13,19 @@ class Heuristic():
             count = self.count_one_off_four_in_a_row(sequence)
             positive_values_sum += count[0]
             negative_values_sum += count[1]
-        score = HEURISTIC_MULTIPLIER*(positive_values_sum - negative_values_sum)
-        
+        score = HEURISTIC_MULTIPLIER * \
+            (positive_values_sum - negative_values_sum)
+
         return score
-    
+
     def _get_all_sequences(self, table):
         all_sequences = []
         for sequence in self._get_horizontal_sequences(table):
             all_sequences.append(sequence)
         for sequence in self._get_vertical_sequences(table):
-            all_sequences.append(sequence)  
+            all_sequences.append(sequence)
         for sequence in self._get_lowering_diagonal_sequences(table):
-            all_sequences.append(sequence)  
+            all_sequences.append(sequence)
         for sequence in self._get_rising_diagonal_sequences(table):
             all_sequences.append(sequence)
         return all_sequences
@@ -33,7 +35,7 @@ class Heuristic():
         for row in table:
             all_horizontal_sequences.append(row)
         return all_horizontal_sequences
-    
+
     def _get_vertical_sequences(self, table):
         all_vertical_rows = []
         for column_index in range(len(table[0])):
@@ -75,10 +77,10 @@ class Heuristic():
             rising_sequence = []
             for row_index in range(starting_row_index, -1, -1):
                 rising_sequence.append(table[row_index][column_index])
-                column_index += 1          
+                column_index += 1
             all_rising_diagonal_sequences.append(rising_sequence)
         return all_rising_diagonal_sequences
-    
+
     def count_one_off_four_in_a_row(self, row: list):
         top_counter = {}
         top_counter[1] = 0
