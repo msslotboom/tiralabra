@@ -1,3 +1,4 @@
+from connect4 import Connect4
 HEURISTIC_MULTIPLIER = 100
 
 
@@ -5,17 +6,28 @@ class Heuristic():
     def __init__(self) -> None:
         pass
 
-    def _calculate_heuristic(self, table):
-        positive_values_sum = 0
+    def calculate_score(self, game:Connect4):
+        if game.calculate_winner():
+            row, col = game.last_added
+            if game.table[row][col] == 2:
+                return 10000
+            else:
+                return -10000
+        return self._calculate_heuristic(game)
+    
+    def _calculate_heuristic(self, game:Connect4):
+        table = game.table
         negative_values_sum = 0
+        positive_values_sum = 0
         sequences = self._get_all_sequences(table)
         for sequence in sequences:
             count = self.count_one_off_four_in_a_row(sequence)
-            positive_values_sum += count[0]
-            negative_values_sum += count[1]
+            negative_values_sum += count[0]
+            positive_values_sum += count[1]
         score = HEURISTIC_MULTIPLIER * \
             (positive_values_sum - negative_values_sum)
-
+        if score != 0:
+            print("Score is not zero, it is", score)
         return score
 
     def _get_all_sequences(self, table):

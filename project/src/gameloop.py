@@ -30,7 +30,7 @@ class GameLoop():
                 print("You won!")
                 break
             algo = Minimax()
-            best_move = algo.calculate_move(self.game.table, 5)
+            best_move = algo.calculate_move(self.game.table, 6)
             self.game.play_move(best_move, 2)
             if self.game.calculate_winner():
                 print("You lost!")

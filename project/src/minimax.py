@@ -1,29 +1,24 @@
 from copy import deepcopy
 from random import choice
 from connect4 import Connect4
-
+from heuristic import Heuristic
 
 class Minimax():
     """Minimax algorithm, calculates the best move. It simulates a game where both players play optimally, and then selects the move where it has the biggest advantage"""
 
     def __init__(self) -> None:
-        pass
+        self.heuristic = Heuristic()
 
-    def _heuristic(self, game: Connect4) -> int:
-        """heuristic function that returns 1 when it wins, -1 when the opponent wins and 0 when no one wins."""
-        if game.calculate_winner():
-            row, col = game.last_added
-            if game.table[row][col] == 2:
-                return 1
-            return -1
-        return 0
-
+    def _calculate_heuristic_score(self, game: Connect4) -> int:
+        """Heuristic function that calls the heuristic class to calculate a heuristic value"""
+        return self.heuristic.calculate_score(game)
+    
     def _minimax(self, game: Connect4, depth: int, maximising: bool) -> int:
         """Algorithm that maximises the move of the computer and minimises the move of the human player. Note that the heuristic gives a negative value when the move is good for the human player, whichs means that it is effectively playing the best moves for both player"""
         if depth == 0 or game.calculate_winner():
-            return self._heuristic(game)
+            return self._calculate_heuristic_score(game)
         if maximising:
-            value = -5
+            value = -50
             for i in range(len(game.table)):
                 new_game = Connect4()
                 new_game.table = deepcopy(game.table)
@@ -31,7 +26,7 @@ class Minimax():
                     value = max(value, self._minimax(new_game, depth-1, False))
             return value
         else:
-            value = 5
+            value = 50
             for i in range(len(game.table)):
                 new_game = Connect4()
                 new_game.table = deepcopy(game.table)
