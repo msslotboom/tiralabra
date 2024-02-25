@@ -8,6 +8,10 @@
 
 [Week 4 report](https://github.com/msslotboom/tiralabra/blob/main/documentation/week4_report.md)
 
+[Week 5 report](https://github.com/msslotboom/tiralabra/blob/main/documentation/week5_report.md)
+
+[Week 6 report](https://github.com/msslotboom/tiralabra/blob/main/documentation/week6_report.md)
+
 [Project specification](https://github.com/msslotboom/tiralabra/blob/main/documentation/project_specification.md)
 
 
