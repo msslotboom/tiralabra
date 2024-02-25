@@ -1,5 +1,5 @@
-project/src/__pycache__/
-project/src/tests/__pycache__/
-project/src/.pytest_cache
-project/htmlcov
-project/.coverage
+src/__pycache__/
+src/tests/__pycache__/
+src/.pytest_cache
+htmlcov
+.coverage
