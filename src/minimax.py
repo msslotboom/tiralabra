@@ -64,14 +64,3 @@ class Minimax():
         print(calculation_result)
         best_move = calculation_result[1]
         return best_move
-
-    def _select_highest_random_score(self, evaluations: list) -> int:
-        """Function called by calculate move,
-        to make sure that if there are multiple optimal moves,
-        the selection of the optimal move is random"""
-        highest_score = max(evaluations, key=evaluations.get)
-        all_highest_scores = []
-        for score in evaluations:
-            if score == highest_score:
-                all_highest_scores.append(score)
-        return choice(all_highest_scores)
