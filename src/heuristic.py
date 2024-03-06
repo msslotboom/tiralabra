@@ -1,21 +1,29 @@
 from connect4 import Connect4
 HEURISTIC_MULTIPLIER = 100
+HEURISTIC_WIN_SCORE = 10000
 
 
 class Heuristic():
+    """Heuristic class that gives a score to the game situation.
+    Used by the minimax algorithm to give a score to each scenario
+    it runs through"""
+
     def __init__(self) -> None:
         pass
 
-    def calculate_score(self, game:Connect4):
+    def calculate_score(self, game: Connect4):
+        """Gives the score to the game. Higher is better for player 2.
+        A win gives a positive or negative HEURISTIC_WIN_SCORE, a sequence
+        that is one off four in a row gives the amount of points
+        defined in the constant HEURISTIC_MULTIPLIER"""
         if game.calculate_winner():
             row, col = game.last_added
             if game.table[row][col] == 2:
-                return 10000
-            else:
-                return -10000
+                return HEURISTIC_WIN_SCORE
+            return -HEURISTIC_WIN_SCORE
         return self._calculate_heuristic(game)
-    
-    def _calculate_heuristic(self, game:Connect4):
+
+    def _calculate_heuristic(self, game: Connect4):
         table = game.table
         negative_values_sum = 0
         positive_values_sum = 0
@@ -26,11 +34,12 @@ class Heuristic():
             positive_values_sum += count[1]
         score = HEURISTIC_MULTIPLIER * \
             (positive_values_sum - negative_values_sum)
-        if score != 0:
-            print("Score is not zero, it is", score)
         return score
 
     def _get_all_sequences(self, table):
+        """Gets all sequences from the board. 
+        This code is divided into different functions per direction,
+        that this function calls"""
         all_sequences = []
         for sequence in self._get_horizontal_sequences(table):
             all_sequences.append(sequence)
@@ -94,6 +103,9 @@ class Heuristic():
         return all_rising_diagonal_sequences
 
     def count_one_off_four_in_a_row(self, row: list):
+        """Function that counts the scenarios where a player has a sequence
+        where if it fills in one empty spot the player gets a four in a row
+        and wins. """
         top_counter = {}
         top_counter[1] = 0
         top_counter[2] = 0
@@ -107,7 +119,9 @@ class Heuristic():
                 if player == -1:
                     counter = 1
                 else:
-                    # If not first zero: remove previous zerocounter from counter, add one, store new zerocounter for that player, update other players counter to 1
+                    # If not first zero: remove previous zerocounter from counter,
+                    # add one, store new zerocounter for that player,
+                    # update other players counter to 1
                     if zero_counter[player] != 0:
                         counter -= zero_counter[player]
                         zero_counter[player] = counter + 1

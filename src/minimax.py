@@ -3,6 +3,7 @@ from random import choice
 from connect4 import Connect4
 from heuristic import Heuristic
 
+
 class Minimax():
     """Minimax algorithm, calculates the best move. 
     It simulates a game where both players play optimally, 
@@ -15,7 +16,7 @@ class Minimax():
         """Heuristic function that calls the heuristic class to calculate a heuristic value"""
         return self.heuristic.calculate_score(game)
 
-    def _minimax(self, game: Connect4, depth: int, maximising: bool, alpha:int, beta:int, first_run:bool=True, move:int=-1) -> int:
+    def _minimax(self, game: Connect4, depth: int, maximising: bool, alpha: int, beta: int, first_run: bool = True, move: int = -1) -> int:
         """Algorithm that maximises the move of the computer
         and minimises the move of the human player. Note that the heuristic
         gives a negative value when the move is good for the human player, 
@@ -31,7 +32,8 @@ class Minimax():
                 if new_game.play_move(i, 2):
                     if first_run:
                         move = i
-                    result = self._minimax(new_game, depth-1, False, alpha, beta, False, move)
+                    result = self._minimax(
+                        new_game, depth-1, False, alpha, beta, False, move)
                     if result[0] > value:
                         value = result[0]
                         best_move = result[1]
@@ -47,7 +49,8 @@ class Minimax():
                 if new_game.play_move(i, 1):
                     if first_run:
                         move = i
-                    result = self._minimax(new_game, depth-1, True, alpha, beta, False, move)
+                    result = self._minimax(
+                        new_game, depth-1, True, alpha, beta, False, move)
                     if result[0] < value:
                         value = result[0]
                         best_move = result[1]
@@ -60,7 +63,7 @@ class Minimax():
         """Calculates the best move by calling the minimax algorithm. 
         It gives all its possible moves to the minimax algorithm, 
         returns the index of the best move"""
-        calculation_result = self._minimax(game, depth, True, -100000000000, 100000000000)
-        print(calculation_result)
+        calculation_result = self._minimax(
+            game, depth, True, -100000000000, 100000000000)
         best_move = calculation_result[1]
         return best_move
