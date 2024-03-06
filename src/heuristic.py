@@ -11,7 +11,7 @@ class Heuristic():
     def __init__(self) -> None:
         pass
 
-    def calculate_score(self, game: Connect4):
+    def calculate_score(self, game: Connect4, depth: int):
         """Gives the score to the game. Higher is better for player 2.
         A win gives a positive or negative HEURISTIC_WIN_SCORE, a sequence
         that is one off four in a row gives the amount of points
@@ -19,8 +19,8 @@ class Heuristic():
         if game.calculate_winner():
             row, col = game.last_added
             if game.table[row][col] == 2:
-                return HEURISTIC_WIN_SCORE
-            return -HEURISTIC_WIN_SCORE
+                return HEURISTIC_WIN_SCORE+depth
+            return -HEURISTIC_WIN_SCORE-depth
         return self._calculate_heuristic(game)
 
     def _calculate_heuristic(self, game: Connect4):
