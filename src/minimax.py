@@ -11,7 +11,6 @@ class Minimax():
 
     def __init__(self, debug:bool=False) -> None:
         self.heuristic = Heuristic()
-        self.organised_moves = []
         self.debug = debug
         if self.debug:
             self.result = []
@@ -87,6 +86,7 @@ class Minimax():
         """Calculates the best move by calling the minimax algorithm. 
         It gives all its possible moves to the minimax algorithm, 
         returns the index of the best move"""
+        self.heuristic = Heuristic()
         if self.debug:
             self.result = []
         calculation_result = self._minimax(
@@ -94,4 +94,5 @@ class Minimax():
         best_move = calculation_result[1]
         if self.debug:
             print(sorted(self.result, key = lambda result: result[1]))
+            print("Saved heuristic calculations:", self.heuristic.get_saved_calculations())
         return best_move
