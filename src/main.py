@@ -1,24 +1,15 @@
 from minimax import Minimax
 from connect4 import Connect4
 from gameloop import GameLoop
-game = Connect4()
-gameloop = GameLoop(game)
-gameloop.run()
+import argparse
 
-# game.table = [[0, 0, 0, 0, 0, 0, 0],
-#               [0, 0, 0, 0, 0, 0, 0],
-#               [1, 0, 0, 1, 0, 2, 0],
-#               [0, 1, 1, 0, 2, 0, 0],
-#               [0, 1, 1, 2, 1, 0, 0],
-#               [1, 1, 2, 1, 0, 0, 0]]
+def run(args):
+	game = Connect4()
+	gameloop = GameLoop(game, args.debug)
+	gameloop.run()
 
-# game.table = [[0, 0, 0, 0, 0, 0, 0],
-# [0, 0, 0, 0, 0, 0, 0],
-# [2, 0, 0, 0, 0, 0, 0],
-# [2, 0, 0, 0, 0, 0, 0],
-# [2, 0, 0, 0, 0, 0, 0],
-# [1, 1, 1, 2, 0, 0, 0]]
-# game.last_added = (5,2)
-# algo = Minimax()
-# algo.calculate_move(game.table, 5)
-# # algo = Minimax()
+if __name__ == "__main__":
+	parser = argparse.ArgumentParser()
+	parser.add_argument('--debug', action='store_true')
+	args = parser.parse_args()
+	run(args)

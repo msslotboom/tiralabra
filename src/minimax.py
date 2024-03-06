@@ -4,7 +4,6 @@ from connect4 import Connect4
 from heuristic import Heuristic
 from math import floor
 
-
 class Minimax():
     """Minimax algorithm, calculates the best move. 
     It simulates a game where both players play optimally, 
@@ -43,8 +42,6 @@ class Minimax():
         gives a negative value when the move is good for the human player, 
         whichs means that it is effectively
         playing the best moves for both player"""
-        if move == 1:
-            print(game.calculate_winner(), depth)
         if first_run:
             self.organised_moves = self._organise_moves(len(game.table[0]))
         if depth == 0 or game.calculate_winner():
@@ -91,8 +88,10 @@ class Minimax():
         It gives all its possible moves to the minimax algorithm, 
         returns the index of the best move"""
         if self.debug:
-
+            self.result = []
         calculation_result = self._minimax(
             game, depth, True, -100000000000, 100000000000)
         best_move = calculation_result[1]
+        if self.debug:
+            print(sorted(self.result, key = lambda result: result[1]))
         return best_move

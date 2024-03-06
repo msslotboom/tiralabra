@@ -5,6 +5,10 @@ def start(ctx):
 	ctx.run("python3 src/main.py", pty=True)
 	
 @task
+def start_debug(ctx):
+	ctx.run("python3 src/main.py --debug", pty=True)
+	
+@task
 def test(ctx):
 	ctx.run("pytest src", pty=True)
 
