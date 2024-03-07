@@ -73,6 +73,8 @@ class Minimax():
         moves_copy = moves.copy()
         moves_order_to_return = []
         sorted_stored_results = sorted(stored_results_next_moves, key=lambda x: x[0])
+        if maximising is False:
+            sorted_stored_results.reverse()
         for result in sorted_stored_results:
             moves_order_to_return.append(result[1])
             moves_copy.remove(result[1])
