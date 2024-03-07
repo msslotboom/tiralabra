@@ -9,7 +9,7 @@ class GameLoop():
     Attributes:
             game: stores the class of the game being played"""
 
-    def __init__(self, game: Connect4, debug:bool=False) -> None:
+    def __init__(self, game: Connect4, debug: bool = False) -> None:
         self.game = game
         self.debug = debug
 
@@ -31,7 +31,7 @@ class GameLoop():
                 print("You won!")
                 break
             algo = Minimax(self.debug)
-            best_move = algo.calculate_move(self.game, 6)
+            best_move = algo.calculate_move(self.game, 5)
             self.game.play_move(best_move, 2)
             if self.game.calculate_winner():
                 print("You lost!")

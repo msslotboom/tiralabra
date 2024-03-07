@@ -12,7 +12,7 @@ class Heuristic():
         self._stored_results = {}
         self._saved_calculations = 0
 
-    def _store_result(self, game:Connect4, score: int):
+    def _store_result(self, game: Connect4, score: int):
         key = ""
         for row in game.table:
             for item in row:
@@ -22,7 +22,7 @@ class Heuristic():
     def get_saved_calculations(self):
         return self._saved_calculations
 
-    def _get_stored_result(self, game:Connect4):
+    def _get_stored_result(self, game: Connect4):
         key = ""
         for row in game.table:
             for item in row:

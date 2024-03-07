@@ -45,4 +45,7 @@ class TestMinimax(unittest.TestCase):
         self.game.last_added = (4, 5)
         score, move = self.algo._minimax(
             self.game, 6, True, -100000000000, 100000000000)
+        self.algo.debug = True
+        self.algo.result = []
+        self.algo.calculate_move(self.game, 3)
         self.assertEqual(move, 1)
