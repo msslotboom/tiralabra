@@ -18,6 +18,7 @@ class Minimax():
             self.result = []
         self.time_deepening = False
         self._stored_results = {}
+        self.overtime = False
 
     def _store_result(self, game: Connect4, score: int):
         key = ""
@@ -109,7 +110,8 @@ class Minimax():
                         move = index
                     result = self._minimax(
                         new_game, depth-1, False, alpha, beta, False, move)
-                    self._store_result(new_game, result[0])
+                    if result != -1:
+                        self._store_result(new_game, result[0])
                     if result == -1:
                         break
                     if first_run and self.debug:
@@ -120,6 +122,8 @@ class Minimax():
                     alpha = max(value, alpha)
                     if beta <= alpha:
                         break
+            if value == -100000000000:
+                return -1
             return value, best_move if first_run else move
         else:
             value = 100000000000
@@ -132,7 +136,8 @@ class Minimax():
                         move = index
                     result = self._minimax(
                         new_game, depth-1, True, alpha, beta, False, move)
-                    self._store_result(new_game, result[0])
+                    if result != -1:
+                        self._store_result(new_game, result[0])
                     if result == -1:
                         break
                     if result[0] < value:
@@ -141,6 +146,8 @@ class Minimax():
                     beta = min(beta, value)
                     if beta <= alpha:
                         break
+            if value == 100000000000:
+                return -1
             return value, best_move if first_run else move
 
     def calculate_move_iterative_deepening(self, game: Connect4, time_limit: int):
@@ -153,8 +160,8 @@ class Minimax():
             self.result = []
             new_calculation_result = self._minimax(
                 game, depth, True, -100000000000, 100000000000)
-            # print(new_calculation_result)
-            if new_calculation_result == -1:
+            print(self.result)
+            if new_calculation_result == -1 or self.overtime:
                 break
             depth += 1
             calculation_result = new_calculation_result
