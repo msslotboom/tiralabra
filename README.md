@@ -1,5 +1,9 @@
 # Connect 4 minimax algorithm
+## Documentation
+[Project specification](https://github.com/msslotboom/tiralabra/blob/main/documentation/project_specification.md)
 
+[Project implementation](https://github.com/msslotboom/tiralabra/blob/main/documentation/implementation.md)
+## Reports
 [Week 1 report](https://github.com/msslotboom/tiralabra/blob/main/documentation/week1_report.md)
 
 [Week 2 report](https://github.com/msslotboom/tiralabra/blob/main/documentation/week2_report.md)
@@ -11,8 +15,6 @@
 [Week 5 report](https://github.com/msslotboom/tiralabra/blob/main/documentation/week5_report.md)
 
 [Week 6 report](https://github.com/msslotboom/tiralabra/blob/main/documentation/week6_report.md)
-
-[Project specification](https://github.com/msslotboom/tiralabra/blob/main/documentation/project_specification.md)
 
 
 ## How to use the program
