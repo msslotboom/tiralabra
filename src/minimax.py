@@ -41,6 +41,9 @@ class Minimax():
         return self.heuristic.calculate_score(game, depth)
 
     def _organise_base_moves(self, game:Connect4):
+        """Organises the moves from middle to outsides.
+        This is done in a function instead of a predetermined
+        list so that it works for tables of all sizes"""
         new_moves_list = []
         moves_length = len(game.table[0])
         index = floor(moves_length/2)
@@ -58,6 +61,10 @@ class Minimax():
         return new_moves_list
     
     def _order_next_moves(self, game:Connect4, moves: list, maximising: bool):
+        """Orders the next moves based on the saved results.
+        Results are sorted from positive to negative,
+        and reversed if minimising. The rest of the moves
+        are added from center to outside"""
         if maximising:
             player = 2
         else:
@@ -86,6 +93,7 @@ class Minimax():
         if not self.time_deepening:
             return False
         if time.time() - self.start_time > self.time_limit:
+            self.overtime = True
             return True
         return False
 
@@ -115,7 +123,7 @@ class Minimax():
                     if result != -1:
                         self._store_result(new_game, result[0])
                     if result == -1:
-                        break
+                        return -1
                     if first_run and self.debug:
                         self.result.append(result)
                     if result[0] > value:
@@ -141,7 +149,7 @@ class Minimax():
                     if result != -1:
                         self._store_result(new_game, result[0])
                     if result == -1:
-                        break
+                        return -1
                     if result[0] < value:
                         value = result[0]
                         best_move = result[1]
@@ -153,6 +161,10 @@ class Minimax():
             return value, best_move if first_run else move
 
     def calculate_move_iterative_deepening(self, game: Connect4, time_limit: int):
+        """Runs the minimax algorithm in a iterative way, deepening every run.
+        This allows for a more optimised calculation as the minimax algorithm
+        takes the previous results into account, and orders the moves from
+        good to bad increasing pruning significantly."""
         depth = 1
         self.start_time = time.time()
         calculation_result = -1
@@ -161,14 +173,16 @@ class Minimax():
         while time.time() - self.start_time < time_limit:
             self.result = []
             new_calculation_result = self._minimax(
-                game, depth, True, -100000000000, 100000000000)
-            print(self.result)
+                game, depth, True, -100000000000, 100000000000, True)
+            if self.debug:
+                print(new_calculation_result)
+                print(self.result)
             if new_calculation_result == -1 or self.overtime:
                 break
             depth += 1
             calculation_result = new_calculation_result
         if self.debug:
-            print(sorted(self.result, key=lambda result: result[1]))
+            print("Playing move:", calculation_result)
             print("Saved heuristic calculations:",
                   self.heuristic.get_saved_calculations())
             print("time:", time.time()-self.start_time)
@@ -185,6 +199,4 @@ class Minimax():
         best_move = calculation_result[1]
         if self.debug:
             print(sorted(self.result, key=lambda result: result[1]))
-            print("Saved heuristic calculations:",
-                  self.heuristic.get_saved_calculations())
         return best_move

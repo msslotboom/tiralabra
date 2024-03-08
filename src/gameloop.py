@@ -31,8 +31,8 @@ class GameLoop():
                 print("You won!")
                 break
             algo = Minimax(self.debug)
-            best_move = algo.calculate_move(self.game, 5)
-            # best_move = algo.calculate_move_iterative_deepening(self.game, 2)
+            # best_move = algo.calculate_move(self.game, 8)
+            best_move = algo.calculate_move_iterative_deepening(self.game, 2)
             self.game.play_move(best_move, 2)
             if self.game.calculate_winner():
                 print("You lost!")
