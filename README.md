@@ -18,6 +18,7 @@
 
 [Week 6 report](https://github.com/msslotboom/tiralabra/blob/main/documentation/week6_report.md)
 
+[Week 7 report](https://github.com/msslotboom/tiralabra/blob/main/documentation/week7_report.md)
 
 ## How to use the program
 Clone the project, then execute the following commands to install it:
