@@ -3,6 +3,8 @@
 [Project specification](https://github.com/msslotboom/tiralabra/blob/main/documentation/project_specification.md)
 
 [Project implementation](https://github.com/msslotboom/tiralabra/blob/main/documentation/implementation.md)
+
+[Testing document](https://github.com/msslotboom/tiralabra/blob/main/documentation/testing.md)
 ## Reports
 [Week 1 report](https://github.com/msslotboom/tiralabra/blob/main/documentation/week1_report.md)
 
