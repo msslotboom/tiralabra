@@ -49,3 +49,14 @@ class TestMinimax(unittest.TestCase):
         self.algo.result = []
         self.algo.calculate_move(self.game, 3)
         self.assertEqual(move, 1)
+
+    def test_iterative_deepening_plays_winning_move(self):
+        self.game.table = [[0, 0, 0, 0, 0, 0, 0],
+                           [0, 0, 0, 2, 0, 0, 0],
+                           [0, 0, 0, 1, 0, 0, 0],
+                           [0, 0, 0, 2, 0, 0, 0],
+                           [0, 0, 2, 2, 2, 1, 0],
+                           [1, 1, 1, 2, 1, 1, 0]]
+        self.game.last_added = (4, 5)
+        move = self.algo.calculate_move_iterative_deepening(self.game, 1)
+        self.assertEqual(move, 1)
