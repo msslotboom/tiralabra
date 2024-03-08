@@ -1,8 +1,7 @@
 from copy import deepcopy
-from random import choice
+from math import floor
 from connect4 import Connect4
 from heuristic import Heuristic
-from math import floor
 import time
 
 
@@ -21,6 +20,9 @@ class Minimax():
         self.overtime = False
 
     def _store_result(self, game: Connect4, score: int):
+        """Stores results for each game state. The rows
+        of the game table are turned into a string
+        and used as the key for the dictionary."""
         key = ""
         for row in game.table:
             for item in row:
@@ -28,6 +30,9 @@ class Minimax():
         self._stored_results[key] = score
 
     def _get_stored_result(self, game: Connect4):
+        """Gets the stored result using the game table
+        rows as the key for the dictionary.
+        Returns False if it is not stored"""
         key = ""
         for row in game.table:
             for item in row:
@@ -35,12 +40,12 @@ class Minimax():
         if key in self._stored_results:
             return self._stored_results[key]
         return False
-    
+
     def _calculate_heuristic_score(self, game: Connect4, depth: int) -> int:
         """Heuristic function that calls the heuristic class to calculate a heuristic value"""
         return self.heuristic.calculate_score(game, depth)
 
-    def _organise_base_moves(self, game:Connect4):
+    def _organise_base_moves(self, game: Connect4):
         """Organises the moves from middle to outsides.
         This is done in a function instead of a predetermined
         list so that it works for tables of all sizes"""
@@ -59,8 +64,8 @@ class Minimax():
                 down = True
             jump += 1
         return new_moves_list
-    
-    def _order_next_moves(self, game:Connect4, moves: list, maximising: bool):
+
+    def _order_next_moves(self, game: Connect4, moves: list, maximising: bool):
         """Orders the next moves based on the saved results.
         Results are sorted from positive to negative,
         and reversed if minimising. The rest of the moves
@@ -79,7 +84,8 @@ class Minimax():
                 stored_results_next_moves.append((stored_result, move))
         moves_copy = moves.copy()
         moves_order_to_return = []
-        sorted_stored_results = sorted(stored_results_next_moves, key=lambda x: x[0])
+        sorted_stored_results = sorted(
+            stored_results_next_moves, key=lambda x: x[0])
         if maximising is False:
             sorted_stored_results.reverse()
         for result in sorted_stored_results:
@@ -90,6 +96,8 @@ class Minimax():
         return moves_order_to_return
 
     def _time_check(self):
+        """First checks if iterative deepening is being used.
+        If yes, it checks whether the allocated time has been passed"""
         if not self.time_deepening:
             return False
         if time.time() - self.start_time > self.time_limit:
@@ -111,7 +119,8 @@ class Minimax():
             return self._calculate_heuristic_score(game, depth), move
         if maximising:
             value = -100000000000
-            organised_next_moves = self._order_next_moves(game, self.organised_moves, maximising)
+            organised_next_moves = self._order_next_moves(
+                game, self.organised_moves, maximising)
             for index in organised_next_moves:
                 new_game = Connect4()
                 new_game.table = deepcopy(game.table)
@@ -137,7 +146,8 @@ class Minimax():
             return value, best_move if first_run else move
         else:
             value = 100000000000
-            organised_next_moves = self._order_next_moves(game, self.organised_moves, maximising)
+            organised_next_moves = self._order_next_moves(
+                game, self.organised_moves, maximising)
             for index in organised_next_moves:
                 new_game = Connect4()
                 new_game.table = deepcopy(game.table)
@@ -183,8 +193,6 @@ class Minimax():
             calculation_result = new_calculation_result
         if self.debug:
             print("Playing move:", calculation_result)
-            print("Saved heuristic calculations:",
-                  self.heuristic.get_saved_calculations())
             print("time:", time.time()-self.start_time)
             print("Depth:", depth)
         return calculation_result[1]
