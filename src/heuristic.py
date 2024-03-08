@@ -9,45 +9,19 @@ class Heuristic():
     it runs through"""
 
     def __init__(self) -> None:
-        self._stored_results = {}
-        self._saved_calculations = 0
-
-    def _store_result(self, game: Connect4, score: int):
-        key = ""
-        for row in game.table:
-            for item in row:
-                key += str(item)
-        self._stored_results[key] = score
-
-    def get_saved_calculations(self):
-        return self._saved_calculations
-
-    def _get_stored_result(self, game: Connect4):
-        key = ""
-        for row in game.table:
-            for item in row:
-                key += str(item)
-        if key in self._stored_results:
-            self._saved_calculations += 1
-            return self._stored_results[key]
-        return False
+        pass
 
     def calculate_score(self, game: Connect4, depth: int):
         """Gives the score to the game. Higher is better for player 2.
         A win gives a positive or negative HEURISTIC_WIN_SCORE, a sequence
         that is one off four in a row gives the amount of points
         defined in the constant HEURISTIC_MULTIPLIER"""
-        if self._get_stored_result(game) is not False:
-            return self._get_stored_result(game)
         if game.calculate_winner():
             row, col = game.last_added
             if game.table[row][col] == 2:
-                self._store_result(game, HEURISTIC_WIN_SCORE+depth)
                 return HEURISTIC_WIN_SCORE+depth
-            self._store_result(game, -HEURISTIC_WIN_SCORE-depth)
             return -HEURISTIC_WIN_SCORE-depth
         calculated_heuristic = self._calculate_heuristic(game)
-        self._store_result(game, calculated_heuristic)
         return calculated_heuristic
 
     def _calculate_heuristic(self, game: Connect4):
