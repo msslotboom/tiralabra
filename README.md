@@ -18,12 +18,17 @@
 ## How to use the program
 Clone the project, then execute the following commands to install it:
 ```
-cd project
 poetry install --no-root
 ```
 Now you can execute the program using the following command:
 ```
 poetry run invoke start
+```
+This starts the game. The user plays as player 1, and the program calculates the moves for player 2. You select a column to play by entering a number between 0 and 6.
+
+Addittionally, you can run the program in debug mode, which prints additional information:
+```
+poetry run invoke start-debug
 ```
 You can run the tests using the command:
 ```
